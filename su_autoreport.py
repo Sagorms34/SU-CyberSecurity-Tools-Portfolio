@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SU-AutoReport v8.1: The Ultimate Artisan-Grade Visual Report Generator (NameError Fix)
+# SU-AutoReport v8.3: The Ultimate Artisan-Grade Visual Report Generator (SAGAR Signature Edition)
 
 import requests
 import argparse
@@ -27,10 +27,10 @@ def print_banner():
  / ____| |  | || \ | |  / _ \|   \/ __ \|  ___|
 | (___ | |  | ||  \| | | | | | |\ | |  | | |__  
  \___ \| |  | || . ` | | | | | | \| |__| |  __| 
- ____) | |__| || |\  | | |_| | |\ | |__| | |____
+ ____) | |__| || |\  | | |_| | |\  | |__| | |____
 |_____/ \____/|_| \_|  \___/|_| \_\____/|_____|
   
-    {Colors.YELLOW}S U - A U T O R E P O R T | Artisan-Grade Visual Report v8.1 (Fixed){Colors.ENDC}
+    {Colors.YELLOW}S U - A U T O R E P O R T | Artisan-Grade Visual Report v8.3 (SAGAR Edition){Colors.ENDC}
     """
     print(banner)
 
@@ -126,7 +126,7 @@ def scan_directories_and_robots(target_url):
         pass
     return found_paths
 
-# --- VISUALIZATION & DATA ENRICHMENT FUNCTIONS (The missing function is added here) ---
+# --- VISUALIZATION & DATA ENRICHMENT FUNCTIONS ---
 
 def get_raw_scan_data(target_url):
     """Gathers raw HTTP Headers and simulates a full 1000-port scan log."""
@@ -253,7 +253,7 @@ def generate_risk_matrix(findings):
     """
     return matrix_html, high_count, medium_count, low_count
 
-# --- REPORT GENERATION (No changes here, now uses the defined functions) ---
+# --- REPORT GENERATION ---
 
 def generate_html_report(target_url, ip_address, open_ports, header_findings, found_paths, cors_vulnerable, waf_status):
     report_date = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -298,7 +298,7 @@ def generate_html_report(target_url, ip_address, open_ports, header_findings, fo
         {visual_chart_html}
         {risk_matrix_html}
     </div>
-    <p>This penetration test was conducted on <strong>{urlparse(target_url).netloc}</strong> utilizing the SU-AutoReport v8.1 framework. The overall risk rating is <strong>Medium</strong>. The graphical distribution above shows the severity breakdown of all {high_count + medium_count + low_count} validated findings. The comprehensive analysis spans 40+ pages, detailing methodology, findings, and technical remediation guidance.</p>
+    <p>This penetration test was conducted on <strong>{urlparse(target_url).netloc}</strong> utilizing the SU-AutoReport v8.3 framework. The overall risk rating is <strong>Medium</strong>. The graphical distribution above shows the severity breakdown of all {high_count + medium_count + low_count} validated findings. The comprehensive analysis spans 40+ pages, detailing methodology, findings, and technical remediation guidance. This section alone is designed to be multi-page to ensure report density.</p>
     </div>
     """
     
@@ -314,7 +314,7 @@ def generate_html_report(target_url, ip_address, open_ports, header_findings, fo
         </div>
     </div>
     
-    <p><strong>WAF Status:</strong> The scan determined the presence of a Web Application Firewall or CDN to be: {waf_status}.</p>
+    <p><strong>WAF Status:</strong> The scan determined the presence of a Web Application Firewall or CDN to be: {waf_status}. This section contains significant filler text to ensure the page is utilized properly before the next page break, preventing the 'empty page' syndrome. Methodology text is expanded here significantly...</p>
     </div>
     """
     
@@ -324,11 +324,11 @@ def generate_html_report(target_url, ip_address, open_ports, header_findings, fo
         <tr><th>Security Standard</th><th>Status</th><th>Gap Details</th></tr>
         {''.join([f"<tr><td>{c['Standard']}</td><td>{c['Status']}</td><td><p style='font-size: 0.8em;'>{c['Details']}</p></td></tr>" for c in compliance_data])}
     </table>
-    <p style="margin-top: 20px;">This compliance assessment is based on automated checks only. The detailed compliance matrix, when fully printed, spans several pages due to the necessary regulatory context provided for each gap.</p>
+    <p style="margin-top: 20px;">This compliance assessment is based on automated checks only. The detailed compliance matrix, when fully printed, spans several pages due to the necessary regulatory context provided for each gap. More filler text is added here to ensure the page is utilized properly before the next page break.</p>
     </div>
     """
     
-    # --- HTML TEMPLATE (CSS is simplified, rest remains same) ---
+    # --- HTML TEMPLATE (CSS is updated to include .creator-art) ---
     css_style = f"""
         :root {{ 
             --high-color: #ff4444; 
@@ -338,9 +338,26 @@ def generate_html_report(target_url, ip_address, open_ports, header_findings, fo
             --primary-color: #00bfff;
         }}
         body {{ font-family: 'Consolas', monospace; line-height: 1.8; color: #bbb; margin: 0; padding: 0; background-color: var(--background-color); }}
-        .cover {{ background-color: #000033; color: #fff; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }}
+        .cover {{ background-color: #000033; color: #fff; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }}
         .content {{ padding: 20px 50px; }}
         h1, h2, h3, h4 {{ color: var(--primary-color); border-bottom: 1px solid #333; padding-bottom: 5px; }}
+        
+        /* New Artistic Signature Style */
+        .creator-art {{
+            font-family: 'Arial Black', sans-serif; /* Bold font for art style */
+            font-size: 2.2em;
+            color: #ffcc00; /* Gold color */
+            text-shadow: 0 0 10px #ff4444, 0 0 20px #ff4444; /* Fiery shadow effect */
+            position: absolute; 
+            top: 15%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 900;
+            letter-spacing: 5px;
+            opacity: 0.95;
+            z-index: 10;
+        }}
+        /* End of Artistic Signature Style */
         
         .data-table {{ width: 100%; border-collapse: collapse; margin: 20px 0; }}
         .data-table th, .data-table td {{ border: 1px solid #444; padding: 10px; text-align: left; }}
@@ -372,7 +389,8 @@ def generate_html_report(target_url, ip_address, open_ports, header_findings, fo
     for f in findings:
         badge_class = f"badge-{f['severity']}"
         detailed_findings_html += f'''
-        <div class="finding severity-{f["severity"]}" id="finding-{f["id"]}" style="page-break-before: auto; page-break-after: always;">
+        <div class="finding severity-{f["severity"]}" id="finding-{f["id"]}">
+        <div style="page-break-before: auto;"> 
             <span class="severity-badge {badge_class}">{f["severity"].upper()}</span>
             <h3>{f["id"]}. {f["title"]}</h3>
             <h4>Risk Breakdown (Table)</h4>
@@ -385,6 +403,7 @@ def generate_html_report(target_url, ip_address, open_ports, header_findings, fo
             <h4>Recommendation and Remediation (Extended Technical Guide)</h4>
             {f["recommendation"]}
         </div>
+        </div>
         '''
 
     html_content = f"""
@@ -396,7 +415,8 @@ def generate_html_report(target_url, ip_address, open_ports, header_findings, fo
     </head>
     <body>
         <div class="cover page-break">
-            <h1>SU-AutoReport V8.1</h1>
+            <p class="creator-art">Created by SAGAR</p>
+            <h1>SU-AutoReport V8.3</h1>
             <h2>Ultimate Artisan-Grade Visual Report (40+ Pages)</h2>
             <p><strong>Target:</strong> {urlparse(target_url).netloc}</p>
             <p><strong>Date:</strong> {report_date}</p>
@@ -437,7 +457,7 @@ def generate_html_report(target_url, ip_address, open_ports, header_findings, fo
         </div>
         
         <div class="content">
-            <h1 id="section-findings">5. Detailed Findings and Remediation</h1>
+            <h1 id="section-findings" class="page-break">5. Detailed Findings and Remediation</h1>
             {detailed_findings_html}
         </div>
         
@@ -447,7 +467,7 @@ def generate_html_report(target_url, ip_address, open_ports, header_findings, fo
         </div>
         
         <div class="content" style="margin-top: 100px; padding-bottom: 50px;">
-            <p style="font-size: 0.8em; text-align: center;">Report Generated by SU-AutoReport v8.1 | Artisan-Grade Edition | End of Report</p>
+            <p style="font-size: 0.8em; text-align: center;">Report Generated by SU-AutoReport v8.3 | Artisan-Grade Edition | End of Report</p>
         </div>
     </body>
     </html>
