@@ -30,3 +30,4 @@ Open your terminal and clone the project:
 git clone [https://github.com/Sagorms34/SU-AutoReport.git](https://github.com/Sagorms34/SU-AutoReport.git)
 cd SU-AutoReport
 
+
